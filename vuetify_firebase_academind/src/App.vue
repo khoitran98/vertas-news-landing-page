@@ -1,20 +1,26 @@
  <template>
   <div id="app">
-  	<v-app style="background: white;">
+    <v-app style="background: white;">
+
+      <v-snackbar v-model="snackbar" :timeout="4000" top>
+        <span>Awesome! Email submitted</span>
+        <v-btn color="white" flat @click="snackbar = false">Close</v-btn>
+      </v-snackbar>
+
       <v-toolbar color="#EEEEEE" height="90px" style="border-bottom: 1px solid #707070;" flat fixed>
-        <img id="title-image" src="../src/assets/final_logo.jpg" aspect-ratio = "1.11"> </img> 
+        <img id="title-image" src="../src/assets/final_logo.jpg" aspect-ratio = "1.11">
         <v-text-field id="search" flat solo-inverted hide-details color="black" append-icon="search" background-color="white"> </v-text-field>
-  	    <div id="lsa">
+        <div id="lsa">
           <v-btn color="#707070" class="toolbar-link" flat> Learn </v-btn>
           <v-btn color="#707070" class="toolbar-link" flat> Support </v-btn>
           <v-btn color="#707070" class="toolbar-link" flat> About </v-btn>
         </div>  
         <div id="icons">
           <v-btn icon class="icon">
-      	    <v-icon color ="#707070"> fab fa-twitter </v-icon>
+            <v-icon color ="#707070"> fab fa-twitter </v-icon>
           </v-btn>
           <v-btn icon class="icon">
-        	  <v-icon color ="#707070"> fab fa-facebook-f </v-icon>
+            <v-icon color ="#707070"> fab fa-facebook-f </v-icon>
           </v-btn>
           <v-btn icon class="icon">
             <v-icon color="#707070"> fas fa-bell </v-icon>
@@ -24,7 +30,9 @@
           </v-btn>
         </div> 
       </v-toolbar>
+
       <router-view> </router-view>
+
       <v-footer app class="white--text" height="90px" style="background: black;">
         <div class="text-xs-left" style="position: absolute; left: 3%;">
           <div> <a class="white--text"> About Us </a> </div>
@@ -34,21 +42,56 @@
         <div class="text-xs-center">
           <div id="subscribe"> Subscribe to our Newsletter </div>
           <span>
-            <v-text-field autofocus flat solo-inverted hide-details color="white" id="email" class="white--text" append-outer-icon="send" label= "Email Address" @click:append-outer="sendEmail"> </v-text-field>
+            <v-text-field autofocus flat solo-inverted hide-details
+              color="white" id="email" class="white--text" append-outer-icon="send" 
+              label= "Email Address" @click:append-outer="submitEmail"
+              v-model="email" :rules="emailRules" ref="form"> 
+            </v-text-field>
           </span>
         </div>
         <div class="text-xs-center" style="position: absolute; right: 3%;">
           <div>
-           <img src="../src/assets/final.png" style="width: 115px; height: 43px; border: 1px solid white;"> </img>
+           <img src="../src/assets/final.png" style="width: 115px; height: 43px; border: 1px solid white;">
           </div>
           <div>
             @ Vertas 2019
           </div>
         </div>
       </v-footer>
+
     </v-app>
   </div>
 </template>
+
+<script>
+import db from '@/fb'
+
+export default {
+  name: 'App',
+  data() {
+    return {
+      snackbar: false,
+      email: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid'
+      ]
+    };
+  },
+  methods: {
+    submitEmail() {
+      if(this.$refs.form.validate()) {
+        const email = {
+          email_address: this.email
+        }
+        db.collection('emails').add(email).then(() => {
+            this.snackbar = true
+          })
+      }
+    }
+  }
+}
+</script>
 
 <style>
 #search {
@@ -167,16 +210,3 @@ span > .v-text-field {
 }
 }
 </style>
-<script>
-export default {
-  name: 'home',
-  data() {
-    return {
-    };
-  },
-  methods: {
-    sendEmail(){
-    }
-  }
-}
-</script>

@@ -4,21 +4,25 @@
       <v-layout  class="text-xs-center" align-center>
         <v-flex class=" text white--text">
           Truth Dies In Silence
- 	      </v-flex>
+        </v-flex>
       </v-layout>
     </v-container>
     <v-container id="box2" fill-height fluid>
       <v-layout class="text-xs-center" align-center>
         <v-flex class="text black--text">
- 	        Join Us Before It's Too Late
+          Join Us Before It's Too Late
         </v-flex>
       </v-layout>
     </v-container>
     <v-container id="box3" fill-height fluid>
       <v-layout class="text-xs-center" align-center>
         <v-flex class="black--text">
-  	      <div> C O M I N G&nbsp;&nbsp; S O O N <br> </br> M I D&nbsp;&nbsp; 2 0 1 9 </div>
- 	      </v-flex>
+          <div> 
+            C O M I N G&nbsp;&nbsp; S O O N 
+            <br>
+            M I D&nbsp;&nbsp; 2 0 1 9 
+          </div>
+        </v-flex>
       </v-layout>
     </v-container> 
   </div>   
@@ -50,7 +54,7 @@ export default {
 #box2 {
 	border-top: 1px solid #707070;
   border-bottom: 1px solid #707070;
-	box-shadow: 0px 19.2px 40px rgba(0, 0, 0, .16);
+	box-shadow: 0px 19.2px 40px rgba(0, 0, 0, .08);
   background: white; 
   margin-top: 76px; 
   height: 300px;
