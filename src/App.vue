@@ -45,13 +45,13 @@
             <v-text-field autofocus flat solo-inverted hide-details
               color="white" id="email" class="white--text" append-outer-icon="send" 
               label= "Email Address" @click:append-outer="submitEmail"
-              v-model="email" :rules="emailRules" ref="form"> 
+              v-model="email" :rules="emailRules" ref="form" lazy-validation> 
             </v-text-field>
           </span>
         </div>
         <div class="text-xs-center" style="position: absolute; right: 3%;">
           <div>
-           <img src="../src/assets/final.png" style="width: 115px; height: 43px; border: 1px solid white;">
+           <img id="logo" src="../src/assets/final.png" style="width: 115px; height: 43px; border: 1px solid white;">
           </div>
           <div>
             @ Vertas 2019
@@ -74,7 +74,8 @@ export default {
       email: '',
       emailRules: [
         v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid'
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
+        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
       ]
     };
   },
@@ -194,15 +195,21 @@ span > .v-text-field {
 	left: 4%;
 }
 .v-text-field {
-  left: 175px;
+  left: 150px;
   width: 60%;
 }
 #subscribe {
-  width: 40%;
-  left: 30%;
+  width: 50%;
+  left: 25%;
 }
 #lsa {
   display: none;
+}
+#logo {
+  height: auto; 
+  width: auto; 
+  max-width: 80px; 
+  max-height: 30px;
 }
 span > .v-text-field {
   width: 30%; 
