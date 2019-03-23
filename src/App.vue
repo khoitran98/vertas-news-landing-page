@@ -2,11 +2,6 @@
   <div id="app">
     <v-app style="background: white;">
 
-      <v-snackbar v-model="snackbar" :timeout="4000" top>
-        <span>Awesome! Email submitted</span>
-        <v-btn color="white" flat @click="snackbar = false">Close</v-btn>
-      </v-snackbar>
-
       <v-toolbar id="tlbar" color="#EEEEEE" height="90px" style="border-bottom: 1px solid #707070;" flat fixed>
         <img id="title-image" src="../src/assets/final_logo.jpg" aspect-ratio = "1.11">
         <v-text-field id="search" flat solo-inverted hide-details color="black" append-icon="search" background-color="white"> </v-text-field>

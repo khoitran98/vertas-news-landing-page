@@ -1,5 +1,10 @@
 <template>
   <div class="home">
+    <v-snackbar v-model="snackbar" :timeout="4000" top>
+      <span>Awesome! Email submitted</span>
+      <v-btn color="white" flat @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
+    
     <v-container id="box1" class ="mt-100" fill-height fluid>
       <v-layout  class="text-xs-center" align-center>
         <v-flex class=" text white--text">
